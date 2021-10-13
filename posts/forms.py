@@ -1,18 +1,19 @@
 from django import forms
 from posts.models import Post, Link
+from crispy_forms.helper import FormHelper
+from django.forms.models import BaseModelFormSet
 
-class PostCreateForm(forms.Form):
-    author = forms.CharField()
-    title = forms.CharField()
-    description = forms.CharField()
-    extra_field_count = forms.CharField(widget=forms.HiddenInput())
+# class PostCreateForm(forms.Form):
+#     author = forms.CharField()
+#     title = forms.CharField()
+#     description = forms.CharField()
 
-    def __init__(self, *args, **kwargs):
-        extra_fields = kwargs.pop('extra', 0)
+class PostCreateForm(forms.ModelForm):
+	class Meta:
+		model = Post
+		fields =  ['title', 'description', ]
 
-        super(PostCreateForm, self).__init__(*args, **kwargs)
-        self.fields['extra_field_count'].initial = extra_fields
-
-        for index in range(int(extra_fields)):
-            # generate extra fields in the number specified via extra_fields
-            self.fields['extra_field_{index}'.format(index=index)] = forms.CharField()
+class LinkForm(forms.ModelForm):
+	class Meta:
+		model = Link
+		fields = ["url",]

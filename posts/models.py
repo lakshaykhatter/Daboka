@@ -9,18 +9,16 @@ class Post(models.Model):
 	description = models.TextField()
 	date = models.DateTimeField(auto_now_add=True)
 
+	def get_link_children(self):
+		return self.links.all()
+
 	def __str__(self): 
 		return self.title
 
-
 class Link(models.Model):
-	post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='posts')
+	post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='links')
 	url = models.URLField()
 	
 
 	def __str__(self):
 		return self.url
-
-
-
-

@@ -4,5 +4,18 @@
 {% block title %}Sign up{% endblock %}
 
 {% block content %}
+{% if user.is_authenticated %}
 <h1>Welcome {{user.email}}</h1>
+{% endif%}
+{% for post in posts %}
+	<div class="card">
+  <div class="card-body">
+    	<h1><a href="{% url 'post_detail' id=post.id %}">{{post.title}}</a></h1>
+	<h3>{{post.description}}</h3>
+	
+  </div>
+</div>
+<br>
+{% endfor %}
+
 {% endblock content %}

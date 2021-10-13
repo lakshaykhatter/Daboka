@@ -7,8 +7,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/login/', LoginView.as_view(), name="account_login"),
     path('posts/', include("posts.urls")),
-    path("accounts/", include("accounts.urls")),
     path('accounts/', include('allauth.urls')),
+    path("accounts/", include("accounts.urls")),
     path('', include('pages.urls')),
 ]
 

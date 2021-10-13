@@ -162,6 +162,9 @@ LOGIN_REDIRECT_URL = 'home'
 # https://django-allauth.readthedocs.io/en/latest/views.html#logout-account-logout
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
 # https://django-allauth.readthedocs.io/en/latest/installation.html?highlight=backends
+
+ACCOUNT_LOGOUT_ON_GET = True 
+
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
