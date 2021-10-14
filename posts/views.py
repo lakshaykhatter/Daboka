@@ -23,9 +23,10 @@ def post_create_view(request):
 		parent.save()
 		# formset.save()
 		for form in formset:
-			child = form.save(commit=False)
-			child.post = parent
-			child.save()
+				child = form.save(commit=False)
+				if child.url != "":
+					child.post = parent
+					child.save()
 		context['message'] = 'Data saved.'
 		return redirect('post_detail', urlhash=parent.urlhash)
 	return render(request, "posts/post_new.html", context)
@@ -57,10 +58,11 @@ def post_update_view(request, urlhash=None):
 		parent = form.save(commit=False)
 		parent.save()
 		# formset.save()
-		for form in formset:
+		for form in formset:			
 			child = form.save(commit=False)
-			child.post = parent
-			child.save()
+			if child.url != "":
+				child.post = parent
+				child.save()
 		context['message'] = 'Data saved.'
 	return render(request, "posts/post_update.html", context) 
 
