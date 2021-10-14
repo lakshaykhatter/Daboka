@@ -27,12 +27,10 @@ def post_create_view(request):
 				if child.url != "":
 					child.post = parent
 					child.save()
-		context['message'] = 'Data saved.'
 		return redirect('post_detail', urlhash=parent.urlhash)
 	return render(request, "posts/post_new.html", context)
 
 
-@login_required
 def post_detail_view(request, urlhash):
 	context={}
 	obj = get_object_or_404(Post, urlhash=urlhash)

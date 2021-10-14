@@ -6,6 +6,7 @@
   <div class="card-header">
     <h1>{{ object.title }}</h1>
     <p class="lead">{{ object.description}}</p>
+    <p>By: <a href="{% url 'profile_view' object.author.username %}">{{object.author.first_name }} {{object.author.last_name }} </a></p>
 
   </div>
   <ul class="list-group list-group-flush">
