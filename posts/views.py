@@ -27,13 +27,14 @@ def post_create_view(request):
 			child.post = parent
 			child.save()
 		context['message'] = 'Data saved.'
+		return redirect('post_detail', urlhash=parent.urlhash)
 	return render(request, "posts/post_new.html", context)
 
 
 @login_required
-def post_detail_view(request, id):
+def post_detail_view(request, urlhash):
 	context={}
-	obj = get_object_or_404(Post, id=id, author=request.user)
+	obj = get_object_or_404(Post, urlhash=urlhash)
 	context = {
 		"object": obj
 	} 
@@ -41,8 +42,8 @@ def post_detail_view(request, id):
 
 
 @login_required
-def post_update_view(request, id=None):
-	obj = get_object_or_404(Post, id=id, author=request.user)
+def post_update_view(request, urlhash=None):
+	obj = get_object_or_404(Post, urlhash=urlhash, author=request.user)
 	form = PostCreateForm(request.POST or None, instance=obj)
 	LinkFormset = modelformset_factory(Link, form=LinkForm, extra=0)
 	qs = obj.links.all()

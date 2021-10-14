@@ -16,7 +16,7 @@
 {% endif %}
 <div style='margin-top:30px;'>
     <h3>Post </h3>
-    <form  action="{% url 'post_update' id=object.id %}" method="POST">
+    <form  action="{% url 'post_update' urlhash=object.urlhash %}" method="POST">
         {% csrf_token %}
        {% for field in form %}
        <div class='{% if field.field.required %}{{ form.required_css_class }}{%endif%}'>
