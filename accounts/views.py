@@ -16,8 +16,6 @@ def profile_view(request, username):
 	return render(request, "account/profile.html", {"posts":user_posts})
 
 
-
-
 class LoginView(AllauthLoginView):
 	def form_valid(self, form):
 		self.user = form.user # Get the forms user

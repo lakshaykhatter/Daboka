@@ -22,9 +22,6 @@ def HomePageView(request):
 				context["form"] = form
 				if Post.objects.filter(urlhash=urlhash).exists() == False:
 					context['message'] = 'Please retry another code'
-				else:
-					context['message'] = 'Please enter 7 digit code'
-
 
 				return render(request, "pages/home.html", context) 
 
