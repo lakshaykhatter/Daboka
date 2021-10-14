@@ -3,6 +3,7 @@ from pages.forms import CodeSearchForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render
+from posts.models import Post
 
 # class HomePageView(TemplateView):
 #     template_name = 'pages/home.html' 
@@ -10,15 +11,21 @@ from django.shortcuts import render
 def HomePageView(request):
 	if request.method == "POST":
 		form = CodeSearchForm(request.POST)
-		if form.is_valid():
-			urlhash = form.cleaned_data['urlhash']
+		context = {}
 
-			if len(urlhash) == 7:
+		if form.is_valid():
+			urlhash = form.cleaned_data['urlhash'].upper()
+
+			if len(urlhash) == 7 and Post.objects.filter(urlhash=urlhash).exists()  :
 				return HttpResponseRedirect(reverse('post_detail',kwargs={'urlhash': urlhash}))
 			else:
-				context = {}
 				context["form"] = form
-				context['message'] = 'Please enter 7 digit code'
+				if Post.objects.filter(urlhash=urlhash).exists() == False:
+					context['message'] = 'Please retry another code'
+				else:
+					context['message'] = 'Please enter 7 digit code'
+
+
 				return render(request, "pages/home.html", context) 
 
 

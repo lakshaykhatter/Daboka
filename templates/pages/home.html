@@ -8,14 +8,17 @@
 {% block content %}
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-	{% if message %}
-		<p>{{ message }}</p>
-	{% endif %}
+
 
   <h1>Enter Code Below</h1>
+  	{% if message %}
+		<p>{{ message }}</p>
+	{% endif %}
   <form action="" method="post">
     {% csrf_token %}
     {{ form | crispy }}
     <input type="submit"/>
 </div>
+<hr>
+
 {% endblock content %}
