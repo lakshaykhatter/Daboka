@@ -1,7 +1,7 @@
 from pathlib import Path
 import os
 import environ
-env = environ.Env(DEBUG=(bool, False))
+env = environ.Env()
 
 
 
@@ -16,7 +16,7 @@ SECRET_KEY = env("SECRET_KEY")
 
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = False
+DEBUG = True
 
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts

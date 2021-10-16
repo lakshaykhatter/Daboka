@@ -8,6 +8,9 @@ from django.views.generic import RedirectView
 from django.urls import reverse
 from allauth.account.views import LoginView as AllauthLoginView
 from allauth.account.utils import get_next_redirect_url
+from accounts.forms import CustomUserChangeForm
+from django.shortcuts import redirect
+
 
 # Create your views here.
 def profile_view(request, username):
@@ -25,3 +28,18 @@ class LoginView(AllauthLoginView):
 		ret = (get_next_redirect_url(self.request, self.redirect_field_name)
 			or reverse('profile_view', kwargs={'username': self.user.username}))
 		return ret
+
+def edit_profile_view(request,username):
+	if request.method == 'POST':
+		form = CustomUserChangeForm(request.POST, instance=request.user)
+
+		if form.is_valid():
+			form.save()
+			return redirect(reverse('profile_view', kwargs={"username": request.user.username } ))
+	else:
+		if username == request.user.username:
+			form = CustomUserChangeForm(instance=request.user)
+			args = {'form': form}
+			return render(request, 'account/edit_profile.html', args)
+		else:
+			return redirect(reverse('profile_view', kwargs={'username': request.user.username}))

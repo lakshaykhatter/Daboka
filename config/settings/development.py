@@ -8,4 +8,4 @@ DATABASES = {
     }
 }
 
-DEBUG = env("DEBUG") == "True"
+DEBUG = env.bool("DJANGO_DEBUG")
