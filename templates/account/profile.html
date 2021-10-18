@@ -1,17 +1,49 @@
 {% extends '_base.html' %}
 {% load crispy_forms_tags %}
 
-{% block title %}Sign up{% endblock %}
+{% block title %}{{user_object.first_name}}'s Profile{% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
-<h1>Welcome {{user.email}}</h1>
-{% endif%}
+
+<div class="card mb-3">
+  <div class="row no-gutters">
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{user_object.first_name}} {{user_object.last_name}}</h5>
+        <p class="card-text">{{user_object.bio}}</p>
+        <p class="small text-muted">
+        	
+        	{% if user_object.twitter_url %}
+	        	<a href="{{user_object.twitter_url}}">Twitter </a> |
+        	{% endif %}
+        	
+        	{% if user_object.tiktok_url %}
+	        	<a href="{{user_object.tiktok_url}}">TikTok </a> |
+        	{% endif %}
+
+
+        	{% if user_object.instagram_url %}
+	        	<a href="{{ user_object.instagram_url}}">Instagram </a> |
+        	{% endif %}
+
+        	{% if user_object.youtube_url %}
+	        	<a href="{{user_object.youtube_url}}">Youtube </a> |
+	        {% endif %}
+
+
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+<h3>Posts</h3>
 {% for post in posts %}
 	<div class="card">
   <div class="card-body">
-    	<h1><a href="{% url 'post_detail' urlhash=post.urlhash %}">{{post.title}}</a></h1>
-	<p class="lead">{{post.description}}</p>
+    	<h5><a href="{% url 'post_detail' urlhash=post.urlhash %}">{{post.title}}</a></p></h5>
+		<p class="card-text"><small class="text-muted"> {{post.description}} </small></p>
 	
   </div>
 </div>

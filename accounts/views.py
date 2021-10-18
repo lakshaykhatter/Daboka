@@ -16,7 +16,7 @@ from django.shortcuts import redirect
 def profile_view(request, username):
 	u = CustomUser.objects.get(username=username)
 	user_posts = Post.objects.filter(author=u).order_by('-date')
-	return render(request, "account/profile.html", {"posts":user_posts})
+	return render(request, "account/profile.html", {"user_object": u ,"posts":user_posts})
 
 
 class LoginView(AllauthLoginView):
@@ -29,6 +29,7 @@ class LoginView(AllauthLoginView):
 			or reverse('profile_view', kwargs={'username': self.user.username}))
 		return ret
 
+@login_required
 def edit_profile_view(request,username):
 	if request.method == 'POST':
 		form = CustomUserChangeForm(request.POST, instance=request.user)

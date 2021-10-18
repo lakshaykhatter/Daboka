@@ -17,7 +17,9 @@ class CustomUserCreationForm(UserCreationForm):
 
 class CustomUserChangeForm(UserChangeForm):
 	password = None
+	first_name = forms.CharField()
+	last_name = forms.CharField()
 	class Meta:
 		model = CustomUser
-		fields = ('email', 'username', 'first_name', "last_name",)
+		fields = ('email', 'username', 'first_name', "last_name",'bio', "twitter_url","instagram_url","tiktok_url","youtube_url")
 
