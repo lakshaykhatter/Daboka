@@ -9,3 +9,5 @@ DATABASES = {
 }
 
 DEBUG = env.bool("DJANGO_DEBUG")
+
+CRISPY_FAIL_SILENTLY = not DEBUG 

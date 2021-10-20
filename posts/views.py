@@ -4,6 +4,8 @@ from posts.forms import PostCreateForm, LinkForm
 from django.forms.models import modelformset_factory # model form for querysets
 from posts.models import Link, Post
 from django.shortcuts import redirect, render, get_object_or_404
+from django.views.generic.edit import DeleteView
+from django.urls import reverse_lazy
 
 
 @login_required
@@ -56,11 +58,27 @@ def post_update_view(request, urlhash=None):
 		parent = form.save(commit=False)
 		parent.save()
 		# formset.save()
-		for form in formset:			
+		for form in formset:
 			child = form.save(commit=False)
 			if child.url != "":
 				child.post = parent
-				child.save()
+				child.save()	
+			elif child == None:
+				child.delete()
+			
+
 		context['message'] = 'Data saved.'
 	return render(request, "posts/post_update.html", context) 
+
+class PostDeleteView(DeleteView):
+	model = Post
+
+	def get_success_url(self):
+		return reverse_lazy( 'profile_view', kwargs={'username': self.object.author.username})
+	
+	def get_object(self):
+		urlhash = self.kwargs['urlhash']
+		user = self.request.user
+		return get_object_or_404(Post, urlhash=urlhash, author=user)
+
 

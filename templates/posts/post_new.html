@@ -2,8 +2,8 @@
 
 {% load crispy_forms_tags %}
 
-
 {% block content %}
+
 
 <style>
     .hidden {
@@ -21,7 +21,7 @@
        {% for field in form %}
        <div class='{% if field.field.required %}{{ form.required_css_class }}{%endif%}'>
         {{ field.errors }}   
-            {{ field.label_tag }} {{ field }}
+            {{ field | as_crispy_field }}
         {% if field.help_text %}
             <p class="help">{{ field.help_text|safe }}</p>
         {% endif %}
@@ -31,19 +31,21 @@
 
         {% if formset %}
         <h3>Links</h3>
-        {{ formset.management_form }}
+        {{ formset.management_form|crispy }}
+
         <div id='ingredient-form-list'>
-            {% for form in formset %}
+            {% for form in formset.forms %}
                     <div class='ingredient-form'>
-                        {{ form.as_p }}
+                        {% crispy form %}
+
                     </div>
             {% endfor %}
         </div>
 
         <div id='empty-form' class='hidden'>{{ formset.empty_form.as_p }}</div>
-        <button id='add-more' type='button'>Add more</button>
+        <button id='add-more' class="btn btn-success" type='button'>Add more</button>
         {% endif %}
-        <button style='margin-top:10px;' type='submit' >Save</button>
+        <button class="btn btn-success" type='submit' >Save</button>
     </form>
 </div>
 

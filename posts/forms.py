@@ -15,7 +15,6 @@ class PostCreateForm(forms.ModelForm):
 
 class LinkForm(forms.ModelForm):
 	url = forms.URLField(required=False)
-	
 	class Meta:
 		model = Link
 		fields = ["url",]

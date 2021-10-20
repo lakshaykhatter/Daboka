@@ -43,8 +43,12 @@
 	<div class="card">
   <div class="card-body">
     	<h5><a href="{% url 'post_detail' urlhash=post.urlhash %}">{{post.title}}</a></p></h5>
-		<p class="card-text"><small class="text-muted"> {{post.description}} </small></p>
-	
+
+		  <p class="card-text"><small class="text-muted"> {{post.description}} </small></p>
+
+      {% if request.user.username in request.path and request.user.username != "" %}
+      <p class="card-text"><a href="{%url 'post_update' urlhash=post.urlhash%}">Edit</a> | <a href="{%url 'post_delete' urlhash=post.urlhash%}">Delete</p>
+      {% endif %}
   </div>
 </div>
 <br>
