@@ -6,6 +6,8 @@ from posts.models import Link, Post
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic.edit import DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 
 @login_required
@@ -70,7 +72,8 @@ def post_update_view(request, urlhash=None):
 		context['message'] = 'Data saved.'
 	return render(request, "posts/post_update.html", context) 
 
-class PostDeleteView(DeleteView):
+
+class PostDeleteView(LoginRequiredMixin, DeleteView):
 	model = Post
 
 	def get_success_url(self):
