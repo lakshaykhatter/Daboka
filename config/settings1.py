@@ -1,4 +1,4 @@
-from pathlib import Path
+sfrom pathlib import Path
 
 # GENERAL
 # ------------------------------------------------------------------------------
