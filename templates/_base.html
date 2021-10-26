@@ -5,9 +5,23 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
 <title>{% block title %}Daboka{% endblock title %}</title>
-<meta name="description" content="A framework for launching new Django projects quickly.">
-<meta name="author" content="">
+
+<meta name="description" content="Share links with your audiance, easily.">
+<meta name="author" content="Lakshay Khatter">
+
+
+{% if GA_KEY %}
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id={{ GA_KEY }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ GA_KEY }}');
+    </script>
+{% endif %}
+
 
 
 {% block css %}

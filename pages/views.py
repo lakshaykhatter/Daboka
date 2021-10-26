@@ -4,6 +4,9 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render
 from posts.models import Post
+from django.conf import settings
+
+
 
 # class HomePageView(TemplateView):
 #     template_name = 'pages/home.html' 
@@ -29,6 +32,7 @@ def HomePageView(request):
 
 	else:
 		form = CodeSearchForm()
+
 	return render(request, "pages/home.html", {"form": form})
 	
 
