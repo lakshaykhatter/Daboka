@@ -13,6 +13,8 @@ django-debug-toolbar = "==3.2"
 whitenoise = "==5.2.0"
 environs = "*"
 django-environ = "*"
+gunicorn = "==19.9.0"
+psycopg2-binary = "==2.8.5"
 
 [requires]
 python_version = "3.8"
