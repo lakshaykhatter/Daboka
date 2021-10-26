@@ -65,7 +65,7 @@ def post_update_view(request, urlhash=None):
 			if child.url != "":
 				child.post = parent
 				child.save()	
-			elif child == None:
+			elif child == None or child.url == "":
 				child.delete()
 			
 
