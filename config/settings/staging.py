@@ -2,7 +2,7 @@ from config.settings.base import *
 
 
 DATABASES = {
-	"default": env.dj_db_url("DATABASE_URL")
+	"default": env.db_url("DATABASE_URL")
 }
 
 
