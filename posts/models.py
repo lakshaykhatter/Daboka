@@ -35,7 +35,7 @@ class Post(models.Model):
 
 class Link(models.Model):
 	post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='links')
-	url = models.URLField()
+	url = models.CharField(max_length=1000)
 	
 
 	def __str__(self):
