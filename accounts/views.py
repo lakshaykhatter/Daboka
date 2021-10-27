@@ -9,12 +9,13 @@ from django.urls import reverse
 from allauth.account.views import LoginView as AllauthLoginView
 from allauth.account.utils import get_next_redirect_url
 from accounts.forms import CustomUserChangeForm
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 
 
 # Create your views here.
 def profile_view(request, username):
-	u = CustomUser.objects.get(username=username)
+	# u = CustomUser.objects.get(username=username)
+	u = get_object_or_404(CustomUser, username=username)
 	user_posts = Post.objects.filter(author=u).order_by('-date')
 	return render(request, "account/profile.html", {"user_object": u ,"posts":user_posts})
 
