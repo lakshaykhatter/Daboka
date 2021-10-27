@@ -38,6 +38,10 @@ def edit_profile_view(request,username):
 		if form.is_valid():
 			form.save()
 			return redirect(reverse('profile_view', kwargs={"username": request.user.username } ))
+		else:
+			args = {"form": form}
+			return render(request, 'account/edit_profile.html', args)
+
 	else:
 		if username == request.user.username:
 			form = CustomUserChangeForm(instance=request.user)
