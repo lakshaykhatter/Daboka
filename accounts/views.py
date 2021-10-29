@@ -17,7 +17,7 @@ from django.http import HttpRequest
 # Create your views here.
 def profile_view(request, username):
 	# u = CustomUser.objects.get(username=username)
-	u = get_object_or_404(CustomUser, username=username)
+	u = get_object_or_404(CustomUser, username=username.lower())
 	user_posts = Post.objects.filter(author=u).order_by('-date')
 	return render(request, "account/profile.html", {"user_object": u ,"posts":user_posts})
 
@@ -42,7 +42,7 @@ def edit_profile_view(request,username):
 
 			return redirect(reverse('profile_view', kwargs={"username": request.user.username} ))
 		else:
-			request.user.username = username	
+			request.user = CustomUser.objects.get(username=username)
 			args = {"form": form}
 			return render(request, 'account/edit_profile.html', args)
 
