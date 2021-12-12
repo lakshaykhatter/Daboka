@@ -12,9 +12,11 @@ from django.conf import settings
 #     template_name = 'pages/home.html' 
 
 def HomePageView(request):
+	obj = Post.objects.order_by("date").first()
 	if request.method == "POST":
 		form = CodeSearchForm(request.POST)
 		context = {}
+		context["object"] = obj
 
 		if form.is_valid():
 			urlhash = form.cleaned_data['urlhash'].upper()
@@ -32,8 +34,13 @@ def HomePageView(request):
 
 	else:
 		form = CodeSearchForm()
+		obj = Post.objects.order_by("date").first()
 
-	return render(request, "pages/home.html", {"form": form})
+
+
+
+
+	return render(request, "pages/home.html", {"form": form, "object": obj})
 	
 
 class AboutPageView(TemplateView):
