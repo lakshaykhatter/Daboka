@@ -25,7 +25,6 @@
   <div class="card-header">
     <h1><a href="{% url 'post_detail' object.urlhash %}">{{ object.title }}</a></h1>
     <p class="lead">{{ object.description}}</p>
-    	{{object.author.username}}
     {{object.author.first_name }} {{object.author.last_name }} </a></p>
     <p >Shareable Code: {{ object.urlhash}}</p>
 
